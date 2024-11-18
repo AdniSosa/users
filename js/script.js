@@ -1,6 +1,7 @@
 const listaUsuarios = document.getElementById('listaUsuarios');
 const info = 'https://jsonplaceholder.typicode.com/users';
 const age = [25, 45, 33, 28, 48, 53, 37, 31, 22, 19];
+let usersArray = [];
 
 
 const users = () => {
@@ -13,7 +14,7 @@ const users = () => {
         
     })
     .then(users => {
-        console.log(users)
+        //console.log(users)
 
         for (const user of users) {
             //console.log(user);
@@ -26,20 +27,35 @@ const users = () => {
             listaUsuarios.appendChild(userDiv);
             userDiv.appendChild(userInfo);
 
+            const {name, username, phone, email, id, company: {name: companyName}, address: {street, suite, city}} = user;
+            const userAge = age[Math.floor(Math.random() * age.length)];
+            const userImg = `../assets/img/${id}.jpeg`;
+            const userAddress = `${street}, ${suite}, ${city}`;
+
+            usersArray = [{
+                ...user,
+                userAge,
+                userImg,
+                company: companyName,
+                address: userAddress,
+            }]
+
+            //console.log(usersArray)
+
             userInfo.innerHTML = `
                     <div class="info">
-                        <p><span>Nombre:</span> ${user.name}</p> 
-                        <p><span>Edad:</span> ${age[Math.floor(Math.random() * age.length)]}</p> 
-                        <p><span>Username:</span> ${user.username}</p> 
-                        <p><span>Teléfono:</span> ${user.phone}</p> 
-                        <p><span>Email:</span> ${user.email}</p> 
+                        <p><span>Nombre:</span> ${name}</p> 
+                        <p><span>Edad:</span> ${userAge}</p> 
+                        <p><span>Username:</span> ${username}</p> 
+                        <p><span>Teléfono:</span> ${phone}</p> 
+                        <p><span>Email:</span> ${email}</p> 
                     </div>
                     
-                    <img src="../assets/img/${user.id}.jpeg" alt="Foto de perfil" />
+                    <img src="${userImg}" alt="Foto de perfil" />
                     
                     <div class="other-info">
-                    <p><span>Compañía:</span> ${user.company.name}</p> 
-                    <p><span>Dirección:</span> ${user.address.street}, ${user.address.suite}, ${user.address.city}</p> 
+                    <p><span>Compañía:</span> ${companyName}</p> 
+                    <p><span>Dirección:</span> ${userAddress}</p> 
                     </div>
                  `
         }
