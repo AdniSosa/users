@@ -13,12 +13,59 @@ h1 {
 #listaUsuarios {
   display: flex;
   flex-wrap: wrap;
+  text-overflow: ellipsis;
+  justify-content: center;
+}
 
+.userDiv {
+  height: 230px;
 }
 
 img {
-  width: 50%;
-
+  width: 100px;
+  height: 100px;
+  position: relative;
+  top: -140px;
+  left: 255px;
 }
+
+.userInfo {
+  width: 380px;
+  height: 210px;
+  border: 1px rgb(209, 197, 197) solid;
+  border-radius: 5px;
+  margin: 20px;
+  list-style: none;
+  background-color: white;
+}
+
+.info {
+  width: 200px;
+  border: 1px rgb(209, 197, 197)  solid;
+  border-radius: 5px;
+  margin: 25px;
+  padding-left: 5px;
+  
+}
+
+.other-info {
+  position: relative;
+  bottom: 125px;
+  padding-left: 10px;
+}
+
+span {
+  font-weight: bold;
+}
+
+p {
+  font-size: 12px;
+  line-height: 10px;
+}
+
+
+
+
+
 
 

@@ -9,46 +9,42 @@ const users = () => {
         if(!response.ok) {
             throw new Error('No se obtuvo respuesta exitosa.')
         }
-        //console.log(response)
         return response.json();
         
     })
     .then(users => {
-        //console.log(users)
+        console.log(users)
 
         for (const user of users) {
             //console.log(user);
-            const userInfo = document.createElement('li');
-            const userOtherInfo = document.createElement('li');
-            //const userDiv = Document.createElement('div');
-            //userDiv.classList.add('userDiv');
             
-            //listaUsuarios.appendChild(userDiv);
-            listaUsuarios.appendChild(userInfo);
-            listaUsuarios.appendChild(userOtherInfo);
+            const userDiv = document.createElement('div');
+            userDiv.classList.add('userDiv');
+            const userInfo = document.createElement('li');
+            userInfo.classList.add('userInfo');
+    
+            listaUsuarios.appendChild(userDiv);
+            userDiv.appendChild(userInfo);
 
             userInfo.innerHTML = `
-                    Nombre: ${user.name}
-                    Edad: ${age[Math.floor(Math.random() * age.length)]}
-                    Username: ${user.username}
-                    Teléfono: ${user.phone}
-                    Email: ${user.email}
-                    <img 
-                    src= '../assets/img/${user.id}.jpeg' 
-                    alt='Foto de perfil'
-                />
-            `
-            userOtherInfo.innerHTML = `
-                Compañía: ${user.company.name}
-                Dirección: ${user.address.street}, ${user.address.suite}, ${user.address.city}
-            `
-            
-        
+                    <div class="info">
+                        <p><span>Nombre:</span> ${user.name}</p> 
+                        <p><span>Edad:</span> ${age[Math.floor(Math.random() * age.length)]}</p> 
+                        <p><span>Username:</span> ${user.username}</p> 
+                        <p><span>Teléfono:</span> ${user.phone}</p> 
+                        <p><span>Email:</span> ${user.email}</p> 
+                    </div>
+                    
+                    <img src="../assets/img/${user.id}.jpeg" alt="Foto de perfil" />
+                    
+                    <div class="other-info">
+                    <p><span>Compañía:</span> ${user.company.name}</p> 
+                    <p><span>Dirección:</span> ${user.address.street}, ${user.address.suite}, ${user.address.city}</p> 
+                    </div>
+                 `
         }
     })
-    .catch(error => {
-        alert('No se pudo obtener la información solicitada.')
-    })
+    .catch(error => alert('No se pudo obtener la información solicitada.'))
 }
 
 users();
