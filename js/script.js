@@ -1,10 +1,8 @@
 const listaUsuarios = document.getElementById('listaUsuarios');
 const info = 'https://jsonplaceholder.typicode.com/users';
-const age = [25, 45, 33, 28, 48, 53, 37, 31, 22, 19];
-let usersArray = [];
 
 
-const users = () => {
+const usersFunction = () => {
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => {
         if(!response.ok) {
@@ -27,12 +25,15 @@ const users = () => {
             listaUsuarios.appendChild(userDiv);
             userDiv.appendChild(userInfo);
 
+            const maxAge = 55;
+            const minAge = 20;
+            const userAge = Math.floor(Math.random() * (maxAge - minAge + 1) + minAge);
+            
             const {name, username, phone, email, id, company: {name: companyName}, address: {street, suite, city}} = user;
-            const userAge = age[Math.floor(Math.random() * age.length)];
             const userImg = `../assets/img/${id}.jpeg`;
             const userAddress = `${street}, ${suite}, ${city}`;
 
-            usersArray = [{
+            const usersArray = [{
                 ...user,
                 userAge,
                 userImg,
@@ -60,7 +61,7 @@ const users = () => {
                  `
         }
     })
-    .catch(error => alert('No se pudo obtener la información solicitada.'))
+    .catch(error => alert('No se pudo obtener la información solicitada', error))
 }
 
-users();
+usersFunction();
